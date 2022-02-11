@@ -90,7 +90,6 @@
  
      continua_main2:
  	
- 	//ma apuc de cerinte. ATENTIE la input cerinta c
  	//citesc cerinta
  push $cerinta
  push $formatRead1	
@@ -142,7 +141,6 @@ call scanf
 popl %ebx
 popl %ebx
 popl %ebx
-
 
 	//a[x][y]=1, calculez pozitia liniarizata
 movl x,%eax
@@ -198,23 +196,17 @@ jne continua_roles2
   call fflush
   pop %ebx
    
-     
     continua_roles2:
-
   
 addl $1, i
 jmp parcurge_roles
-
 
    switch_malitios:
 	//linia lui sw malitios e %ecx 
 	//parcurg linia %ecx
 	//initializez index coloane cu 0 (edx)
-	
 	//afisez ca am gasit un switch malitios si indexul lui
 
- 
- 
  pushl  i 
  push $mesaj
  call printf
@@ -241,9 +233,7 @@ movl $0,j
  movl n, %ebx
  movl $0, %edx
  mull %ebx
-   
  addl j , %eax
-   
  movl j, %edx
    
  movl (%edi, %eax,4),%ebx
@@ -259,10 +249,11 @@ movl $0,j
  afisare1:
 	//aici fac afisarile pt subp A
  	//%eax e pozitia curenta
- 	//%edx e coloana pe care ma aflu, j  
- 
+ 	//%edx e coloana pe care ma aflu, j 
+	
   	//trebuie sa vad ce dispozitiv e pe pozitia j
-       //in roles , ca sa fac afisarile corespunzatoare
+        //in roles , ca sa fac afisarile corespunzatoare
+       
   mov j, %ebx
   mov (%esi, %ebx, 4), %eax
   
@@ -275,7 +266,6 @@ movl $0,j
   cmp %eax, rolcontroller
   je mesaj_controller
   
-   
  jmp continua_coloana
  
     mesaj_switchmalitios:
@@ -291,7 +281,6 @@ call fflush
 pop %ebx
 
 jmp continua_coloana  
-
 
    mesaj_controller:
 
@@ -335,8 +324,6 @@ pop %ebx
 
 jmp continua_coloana
  
- 
- 
  //---------------------------------------------------------------
    subpb:
         // am in %esi roles
@@ -368,11 +355,8 @@ jmp continua_coloana
    movl ult, %ecx
    movl $0, %eax
    movl %eax, (%esi, %ecx, 4)
-
-
    
    jmp etwhile
-   
    
        continua_subpb2:
  	//daca am afisat macar ceva, afisez newline
@@ -391,7 +375,6 @@ jmp continua_coloana
  je print_Yes
  jne print_No
     
-   
   etwhile:
   
   movl pr, %eax
@@ -399,8 +382,6 @@ jmp continua_coloana
   cmp %ebx, %eax
  	 //se termina while-ul
   jg continua_subpb2
-  
-  
   
   movl pr, %ecx
   
@@ -413,8 +394,6 @@ jmp continua_coloana
  
   movl $0, index2
 
-  
-  
   		//for (index2=0; index2<n, index2++), index2 in ecx
      etfor:
      
@@ -434,7 +413,6 @@ jmp continua_coloana
      
      //iau a[vf][index2] in ebx acum ca sa l compar cu 1
      
-     
      movl $0, %edx
      movl vf, %eax
      mull n
@@ -442,7 +420,6 @@ jmp continua_coloana
      lea matrix, %edi
      movl (%edi,%eax,4),%ebx
      
-    
      cmp $1, %ebx
      
      jne continuafor
@@ -479,9 +456,7 @@ jmp continua_coloana
      cmp $0, %eax
      je afisare_primadata1
      jne afisare_normala
-     
-     
-     
+  
      afisare_primadata1:
      
  pushl index2
@@ -513,14 +488,11 @@ jmp continua_coloana
  movl $1, ok
 
  jmp continuafor
-     
- 
+   
       continuafor:
  addl $1, index2
  jmp etfor
   
-  
-
      print_Yes:
   
  push $formatPrintYes
@@ -543,7 +515,6 @@ jmp continua_coloana
  call fflush 
  pop %ebx
  jmp etexit
-   
    
      print_newline:
  
@@ -572,7 +543,6 @@ jmp continua_coloana
  movl $1, ok
  
  jmp continua_subpb
- 
    
 //-----------------------------------------------------------------------
    subpc:
@@ -602,7 +572,6 @@ jmp continua_coloana
    movl (%esi,%ecx,4), %ebx
    cmp %ebx, rolswitchmalitios
    je modifica_sir
-   
    
    lea viz, %edi
    movl $0, index2
@@ -639,13 +608,9 @@ continua_subpc2:
      movl $2, %eax
      cmp %ebx, %eax
      
-     
-     
      je print_subpc
      jne modifica_sir
-     
-   
-  
+
  etwhile2:
  
   movl pr, %eax
@@ -660,13 +625,11 @@ continua_subpc2:
   movl (%esi, %ecx, 4), %edx
   movl %edx, vf
  
-  
   addl $1, pr
   //incep forul
   movl $0, index2
   lea viz, %edi
   jmp etfor2
-   
    
 etfor2:
   movl index2, %ecx
@@ -709,7 +672,6 @@ etfor2:
   movl %ecx, (%esi, %edx, 4)
   jmp continua_for2
   
- 
  continua_for2:
  
  addl $1, index2
@@ -741,8 +703,6 @@ modifica_viz:
   jmp continua_for_c 
 
 modifica_sir:
-
- 
   lea sir, %edi
   movl $0, len
   jmp etloop
@@ -754,7 +714,6 @@ etloop:
  cmp $0, %al
  je print_subpc
  
- 
  //k are 107
  cmp $107, %al
  jle complement
@@ -762,17 +721,14 @@ etloop:
  subb $10, %al
  continuare:
  movb %al, (%edi, %ecx, 1)
- 
- 
+  
  addl $1, len 
  jmp etloop
-
 
 complement:
 
 addb $16, %al
 jmp continuare
-
 
 print_subpc:
 
